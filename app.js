@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             (snake[0] - width < 0 && direction === -width) ||
             (snake[0] % width === width - 1 && direction === 1) ||
             (snake[0] % width === 0 && direction === -1) ||
-            blocks[snake[0] + direction].classList.contains('snake')
+            blocks[snake[0] + direction].classList.contains('snake', 'snake-head')
         ) {
             alert("ouch! Space bar to restart");
             console.log(score);
@@ -34,7 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // popping tail
         const tail = snake.pop()
-        blocks[tail].classList.remove('snake')
+        blocks[tail].classList.remove('snake', 'snake-head')
+        blocks[snake[0]].classList.add('snake')
+        blocks[snake[0]].classList.remove('snake-head')
         snake.unshift(snake[0] + direction) // moving head
 
         //getting apple 
@@ -49,13 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // intervalTime = intervalTime * speed
             // interval = setInterval(moveOutcome, intervalTime)
         }
-        blocks[snake[0]].classList.add('snake')
+        blocks[snake[0]].classList.add('snake-head')
     }
 
     function randomApple() {
         do {
             appleIndex = Math.floor(Math.random() * blocks.length)
-        } while(blocks[appleIndex].classList.contains('snake')) // maleing sure apple is not on snake
+        } while(blocks[appleIndex].classList.contains('snake', 'snake-head')) // maleing sure apple is not on snake
         blocks[appleIndex].classList.add('apple')
     }
     function start() {
@@ -63,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         interval = setInterval(moveOutcome, intervalTime)
     }
     function reset() {
-        snake.forEach(index => blocks[index].classList.remove('snake'))
+        snake.forEach(index => blocks[index].classList.remove('snake', 'snake-head'))
         blocks[appleIndex].classList.remove('apple')
         clearInterval(interval)
         direction = 1
@@ -73,10 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
         snake = [2, 1, 0]
         currentIndex = 0
         snake.forEach(index => blocks[index].classList.add('snake'))
+        blocks[snake[0]].classList.add('snake-head')
         randomApple()
     }
     function controls(e) {
-        blocks[currentIndex].classList.remove('snake')
+        blocks[currentIndex].classList.remove('snake', 'snake-head')
         switch (e.keyCode) {
             case 37:
                 direction = -1

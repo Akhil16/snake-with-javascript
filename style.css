@@ -42,9 +42,16 @@ body {
 }
 
 .snake {
-    background-color: #0088ff;
+    background-color: #38dcf1;
+    border-radius: 50%;
+}
+
+.snake-head {
+    background-color: red;
+    border-radius: 50%;
 }
 
 .apple {
-    background-color: #ff5500;
+    background-color: #ff7c00;
+    border-radius: 50%;
 }
