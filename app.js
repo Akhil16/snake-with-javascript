@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
 
-    let blocks = document.querySelectorAll('.grid div')
+    let blocks = document.querySelectorAll('.grid-box div')
     let scoreSpan = document.querySelector('#score')
     // let timerSpan = document.querySelector('#timer')
 
@@ -28,19 +28,21 @@ document.addEventListener('DOMContentLoaded', () => {
         ) {
             alert("ouch! Space bar to restart");
             console.log(score);
-            
+
             return clearInterval(interval)
         }
 
         // popping tail
         const tail = snake.pop()
-        blocks[tail].classList.remove('snake')
+        blocks[tail].classList.c
+        blocks[tail].classList.remove('tail')
         snake.unshift(snake[0] + direction) // moving head
 
         //getting apple 
         if (blocks[snake[0]].classList.contains('apple')) {
             blocks[snake[0]].classList.remove('apple')
             blocks[tail].classList.add('snake')
+            blocks[tail].classList.add('tail')
             snake.push(tail)
             randomApple()
             score++
@@ -50,12 +52,40 @@ document.addEventListener('DOMContentLoaded', () => {
             // interval = setInterval(moveOutcome, intervalTime)
         }
         blocks[snake[0]].classList.add('snake')
+        blocks[snake[0]].classList.add('head')
+        blocks[snake[snake.length - 1]].classList.add('tail')
+        blocks[snake[1]].classList.remove('head')
+        switch (direction) {
+            case 1:
+                blocks[snake[0]].classList.add('rh')
+                blocks[snake[1]].classList.remove('rh')
+
+                break;
+            case -1:
+                blocks[snake[0]].classList.add('lh')
+                blocks[snake[1]].classList.remove('lh')
+
+                break;
+            case width:
+                blocks[snake[0]].classList.add('dh')
+                blocks[snake[1]].classList.remove('dh')
+
+                break;
+            case -width:
+                blocks[snake[0]].classList.add('uh')
+                blocks[snake[1]].classList.remove('uh')
+
+                break;
+
+            default:
+                break;
+        }
     }
 
     function randomApple() {
         do {
             appleIndex = Math.floor(Math.random() * blocks.length)
-        } while(blocks[appleIndex].classList.contains('snake')) // maleing sure apple is not on snake
+        } while (blocks[appleIndex].classList.contains('snake')) // maleing sure apple is not on snake
         blocks[appleIndex].classList.add('apple')
     }
     function start() {
@@ -63,7 +93,15 @@ document.addEventListener('DOMContentLoaded', () => {
         interval = setInterval(moveOutcome, intervalTime)
     }
     function reset() {
-        snake.forEach(index => blocks[index].classList.remove('snake'))
+        snake.forEach(index => {
+            blocks[index].classList.remove('snake')
+            blocks[index].classList.remove('rh')
+            blocks[index].classList.remove('lh')
+            blocks[index].classList.remove('uh')
+            blocks[index].classList.remove('dh')
+            blocks[index].classList.remove('head')
+            blocks[index].classList.remove('tail')
+        })
         blocks[appleIndex].classList.remove('apple')
         clearInterval(interval)
         direction = 1
@@ -77,6 +115,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function controls(e) {
         blocks[currentIndex].classList.remove('snake')
+        blocks[currentIndex].classList.remove('head')
+        blocks[currentIndex].classList.remove('tail')
         switch (e.keyCode) {
             case 37:
                 direction = -1
