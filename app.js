@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function checkBitingApple() {
+    function checkBitingApple(tail) {
         //getting apple 
         if (blocks[snake[0]].classList.contains('apple')) {
             blocks[snake[0]].classList.remove('apple')
@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         blocks[tail].classList.remove('tail')
         blocks[tail].classList.remove('snake')
         snake.unshift(snake[0] + direction) // moving head
+        return tail;
     }
 
     function manageSkin() {
@@ -56,6 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
         blocks[snake[0]].classList.add('head')
         blocks[snake[snake.length - 1]].classList.add('tail')
         blocks[snake[1]].classList.remove('head')
+        blocks[snake[1]].classList.remove('rh')
+        blocks[snake[1]].classList.remove('lh')
+        blocks[snake[1]].classList.remove('uh')
+        blocks[snake[1]].classList.remove('dh')
 
         headDirectionSkin()
     }
@@ -89,8 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function moveOutcome() {
         checkBreath()
-        moveSnake()
-        checkBitingApple()
+        const tail = moveSnake()
+        checkBitingApple(tail)
         manageSkin()
     }
 
