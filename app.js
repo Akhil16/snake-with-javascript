@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-
     let blocks = document.querySelectorAll('.grid-box div')
     let scoreSpan = document.querySelector('#score')
     // let timerSpan = document.querySelector('#timer')
@@ -16,9 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let interval = 0
     let play = true
     // assign func to keys
-
-    function moveOutcome() {
-        // losing lives
+    function checkBreath() {
         if (
             (snake[0] + width >= width * width && direction === width) ||
             (snake[0] - width < 0 && direction === -width) ||
@@ -28,20 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ) {
             alert("ouch! Space bar to restart");
             console.log(score);
-
             return clearInterval(interval)
         }
+    }
 
-        // popping tail
-        const tail = snake.pop()
-        blocks[tail].classList.c
-        blocks[tail].classList.remove('tail')
-        snake.unshift(snake[0] + direction) // moving head
-
+    function checkBitingApple() {
         //getting apple 
         if (blocks[snake[0]].classList.contains('apple')) {
             blocks[snake[0]].classList.remove('apple')
-            blocks[tail].classList.add('snake')
             blocks[tail].classList.add('tail')
             snake.push(tail)
             randomApple()
@@ -51,10 +42,25 @@ document.addEventListener('DOMContentLoaded', () => {
             // intervalTime = intervalTime * speed
             // interval = setInterval(moveOutcome, intervalTime)
         }
+    }
+
+    function moveSnake() {
+        const tail = snake.pop() // popping tail
+        blocks[tail].classList.remove('tail')
+        blocks[tail].classList.remove('snake')
+        snake.unshift(snake[0] + direction) // moving head
+    }
+
+    function manageSkin() {
         blocks[snake[0]].classList.add('snake')
         blocks[snake[0]].classList.add('head')
         blocks[snake[snake.length - 1]].classList.add('tail')
         blocks[snake[1]].classList.remove('head')
+
+        headDirectionSkin()
+    }
+
+    function headDirectionSkin() {
         switch (direction) {
             case 1:
                 blocks[snake[0]].classList.add('rh')
@@ -80,6 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
             default:
                 break;
         }
+    }
+    function moveOutcome() {
+        checkBreath()
+        moveSnake()
+        checkBitingApple()
+        manageSkin()
     }
 
     function randomApple() {
@@ -145,5 +157,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 break
         }
     }
+
+
+
     document.addEventListener('keyup', controls)
 })
+
