@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         score = 0
         scoreSpan.textContent = score
         intervalTime = 150
-        snake = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        snake = [1, 0]
         currentIndex = 0
         snake.forEach(index => blocks[index].classList.add('snake'))
         randomApple()
