@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  background-color: #080808;
+  min-height: 100vh;
   padding: 0;
 }
 
@@ -20,13 +22,15 @@ body {
   min-height: 100vh;
   padding: 25px;
 }
+.h-av {
+  min-height: calc(100vh - 80px);
+}
 .grid-box {
-  background-image: url(https://opengameart.org/sites/default/files/backgrounddetailed1.png.preview.jpg);
   width: 400px;
   height: 400px;
   display: flex;
   flex-wrap: wrap;
-  border: 2px solid #eee;
+  border: 2px solid red;
   margin: 0 auto;
   flex-direction: row;
   box-sizing: content-box;
@@ -36,32 +40,24 @@ body {
   box-sizing: border-box;
   height: 20px;
   width: 20px;
-  /* border: 0.001px solid #eee; */
+  /* outline: 0.00001px solid #eee; */
+}
+
+.body-bg {
+  color: #d3d3d3;
+  background-color: #080808;
 }
 
 .snake {
-  background-color: #0088ff;
+  background-color: rgb(165, 158, 158);
 }
 .head {
-  background-color: aqua !important;
-}
-.rh {
-  background-color: green !important;
-}
-.lh {
-  background-color: yellow !important;
-}
-.uh {
-  background-color: black !important;
-}
-.dh {
-  background-color: white !important;
+  background-color: #fdfcfc;
 }
 .tail {
-  background-color: red !important;
+  background-color: #474545;
 }
 
 .apple {
-  background-image: url(https://freesvg.org/storage/img/thumb/johnny_automatic_apple.png);
-  background-size: 20px;
+  background-color: rgb(36, 233, 10);
 }
