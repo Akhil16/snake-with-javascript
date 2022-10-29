@@ -15,3 +15,6 @@ arrow key to change direction
 # Contributers
 
 feel free to update styling, add more transitions etc
+
+oct-2022
+![](oct-2022.png)
