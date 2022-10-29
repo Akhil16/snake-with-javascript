@@ -5,7 +5,7 @@ rendered in browser with css
 --controls--
 Enter to start/ restart
 arrow key to change direction
-Play Here[ link](snake-with-javascript.pages.dev)
+Play Here[ link](https://snake-with-javascript.pages.dev)
 
 
 
