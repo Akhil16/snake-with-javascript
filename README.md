@@ -3,8 +3,10 @@
 using plain javascript to write small snake game.
 rendered in browser with css
 --controls--
-spacebar to start/ restart
+Enter to start/ restart
 arrow key to change direction
+Play Here[ link](snake-with-javascript.pages.dev)
+
 
 
 
